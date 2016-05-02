@@ -1,0 +1,36 @@
+body {
+  font-family: sans-serif;
+}
+
+h1, h2, h3 {
+  color: teal;
+}
+
+h1 {
+  margin: 30px;
+}
+
+#monthlysalary {
+  border: 3px solid teal;
+  padding: 10px;
+  margin: 30px;
+  width: 400px;
+
+}
+
+#container {
+  border: 3px solid teal;
+  padding: 10px;
+  margin: 30px;
+  width: 400px;
+}
+
+.person {
+  border: 1px solid black;
+}
+
+#employeeinfo {
+  width: 150px;
+  margin: 30px;
+
+}
