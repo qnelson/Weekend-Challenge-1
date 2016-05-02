@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var empArray = [];
+  var count = 0;
 
   //Prevents browser from contacting server when submit button is clicked
   $('#employeeinfo').on('submit', function (event) {
@@ -30,6 +31,13 @@ $(document).ready(function () {
     $('#container').append('<div class="person"></div>');
     var $el = $('#container').children().last();
 
+    //Counts the total salaries
+    count += Number(empInfo.employeesalary);
+
+    //Appends average salary cost to DOM
+    $('#title').text('$' + Math.round(count / 12));
+
+    //Appends entered employee information to the DOM
     $el.append('<p>Name: ' + empInfo.employeefirstname + ' ' + empInfo.employeelastname + '</p>');
     $el.append('<p>Employee ID: ' + empInfo.employeenumber + '</p>');
     $el.append('<p>Job Title: ' + empInfo.employeejobtitle + '</p>');
@@ -38,24 +46,17 @@ $(document).ready(function () {
 
   }
 
-  //Calculates the average monthly salary or
-  //(The sum of all entered salaries / 12 months)
-  // = Average Monthly Cost of All Salaries
-  var count = 0;
+  //Calculates the average monthly salary
   function appendSalary(empInfo) {
     $('#monthlysalary').append('<div class="person"></div>');
     var $el = $('#monthlysalary').children().last();
 
+    //pushes each submitted salary to an empty array
     empArray.push(empInfo.employeesalary);
 
-    //Summation function
-    count = 0;
     for (var i = empArray.length; i--;) {
-      count += parseInt(empArray[i]);
 
-      //Average Monthly Salary Cost calculation
-      //.text changes the value in monthlysalary div with every submit
-      $('#title').text('$' + Math.round(count / 12));
+      //Removes black box from average monthly salary cost
       $('#monthlysalary').children().removeClass();
 
     }
@@ -67,7 +68,7 @@ $(document).ready(function () {
   //Allows individual entries to be deleted
   //Deleted entries will automatically update the Monthly Salary calculation
   $('#container').on('click', 'button', function () {
-    count -= $('.person').last().data('monthlysalary');
+    count -= $(this).parent().data('monthlysalary');
     $(this).parent().remove();
     $('#title').text('$' + Math.round(count / 12));
   });
